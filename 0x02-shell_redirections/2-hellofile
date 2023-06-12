@@ -1,2 +1,2 @@
 #!/bin/bash
-man 5 passwd
+cat /etc/passwd
