@@ -52,5 +52,7 @@ Include /etc/ssh/ssh_config.d/*
 #   RekeyLimit 1G 1h
 #   UserKnownHostsFile ~/.ssh/known_hosts.d/%k
 Host *
-    SendEnv LANG LC_*
-    IdentityFile ~/.ssh/school
+IdentityFile ~/.ssh/school
+SendEnv LANG LC_*
+HashKnownHosts yes
+GSSAPIAuthentication yes
