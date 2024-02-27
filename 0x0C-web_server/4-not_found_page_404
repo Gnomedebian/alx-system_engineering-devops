@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Install Nginx on Server and add /redirection and add 404 errors
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install -y nginx
+sudo chown -R "$USER":"$USER" /var/www/
+sudo chown -R "$USER":"$USER" /etc/nginx
+sudo chown -R "$USER":"$USER" /usr/share/nginx/html
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo service nginx restart
+str="\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;"
+sudo sed -i "25i $str" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/404.html
+line="\\\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}"
+sudo sed -i "27i $line" /etc/nginx/sites-available/default
+sudo service nginx restart
+sudo service nginx reload
