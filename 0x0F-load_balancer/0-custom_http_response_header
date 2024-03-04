@@ -13,7 +13,7 @@ sudo sed -i "25i $str" /etc/nginx/sites-available/default
 echo "Ceci n'est pas une page" > /usr/share/nginx/html/404.html
 line="\\\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}"
 sudo sed -i "27i $line" /etc/nginx/sites-available/default
-test="\\tadd_header X-Served-By $HOSTNAME;"
 sudo chown -R "$USER":"$USER" /etc/nginx
-sed -i "24i $test" /etc/nginx/sites-available/default
+test="server \{\n\tadd_header X-Served-By $HOSTNAME;"
+sed -i -E "s/^server \{/$test/" /etc/nginx/sites-available/default
 sudo service nginx restart
