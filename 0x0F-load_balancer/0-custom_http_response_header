@@ -15,5 +15,5 @@ line="\\\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/sha
 sudo sed -i "27i $line" /etc/nginx/sites-available/default
 test="\\tadd_header X-Served-By $HOSTNAME;"
 sudo chown -R "$USER":"$USER" /etc/nginx
-sed -i "13i $test" /etc/nginx/nginx.conf
+sed -i "24i $test" /etc/nginx/sites-available/default
 sudo service nginx restart
