@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Adding a custom Nginx response header.
+
+test="\\tadd_header X-Served-By $HOSTNAME;"
+sudo chown -R "$USER":"$USER" /etc/nginx
+sed -i "13i $test" /etc/nginx/nginx.conf
+sudo service nginx restart
